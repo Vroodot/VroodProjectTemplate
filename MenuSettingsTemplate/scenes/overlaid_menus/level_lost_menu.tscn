@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cykxcqgu75osd"]
+
+[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/extras/scenes/overlaid_menus/level_lost_menu.tscn" id="1_gcxcf"]
+[ext_resource type="Script" path="res://MenuSettingsTemplate/scenes/overlaid_menus/level_lost_menu.gd" id="2_ydqib"]
+
+[node name="LevelLostMenu" instance=ExtResource("1_gcxcf")]
+script = ExtResource("2_ydqib")

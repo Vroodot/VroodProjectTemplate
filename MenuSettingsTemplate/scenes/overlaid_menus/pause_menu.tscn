@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0a4781qnatd2"]
+
+[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/base/scenes/overlaid_menu/menus/pause_menu.tscn" id="1_7jwd7"]
+[ext_resource type="Script" path="res://MenuSettingsTemplate/scenes/overlaid_menus/pause_menu.gd" id="2_ssbt1"]
+[ext_resource type="PackedScene" path="res://MenuSettingsTemplate/scenes/overlaid_menus/mini_options_overlaid_menu.tscn" id="3_p6dkr"]
+
+[node name="PauseMenu" instance=ExtResource("1_7jwd7")]
+script = ExtResource("2_ssbt1")
+options_packed_scene = ExtResource("3_p6dkr")
+main_menu_scene = "res://MenuSettingsTemplate/scenes/menus/main_menu/main_menu_with_animations.tscn"
