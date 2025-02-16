@@ -51,7 +51,7 @@ func _set_point_out(v: Vector2) -> void:
 
 
 func _set_properties(other: SS2D_VertexProperties) -> void:
-	# FIXME: What if other is null?
+	# NOTE: What if other is null?
 	if properties == null or not properties.equals(other):
 		if properties:
 			properties.changed.disconnect(_on_properties_changed)

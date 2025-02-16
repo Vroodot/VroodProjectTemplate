@@ -82,7 +82,7 @@ static func flip_elements(tuple: Vector2i) -> Vector2i:
 ## Optionally also validates that values are of the given type.
 ## Exists mostly for backwards compatibility to allow a seamless transition from Array to Vector2i tuples.
 static func dict_validate(dict: Dictionary, value_type: Variant = null) -> void:
-	# TODO: Maybe don't use asserts but push_warning and return true if successful
+	# NOTE: Maybe don't use asserts but push_warning and return true if successful
 	for key: Variant in dict.keys():
 		var value: Variant = dict[key]
 

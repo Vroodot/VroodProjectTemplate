@@ -134,7 +134,7 @@ func update():
 		return
 	if self.animated_shape.animated_sprite.sprite_frames == null:
 		return
-	
+
 	# I. The actual sprite from the SpriteFrames, for this frame.
 	%SpriteFrameTexture.texture = self.animated_shape.animated_sprite.sprite_frames.get_frame_texture(self.animation_name, self.frame_index)
 	%SpriteFrameTexture.custom_minimum_size = self.zoom_level * %SpriteFrameTexture.texture.get_size()
@@ -144,7 +144,7 @@ func update():
 	%SpriteFrameTexture.texture_repeat = self.animated_shape.animated_sprite.texture_repeat
 	if %SpriteFrameTexture.texture_repeat == TEXTURE_REPEAT_PARENT_NODE:
 		%SpriteFrameTexture.texture_repeat = TEXTURE_REPEAT_DISABLED
-	
+
 	# II. Origin (0, 0) of the parent of the collision shape,
 	# relative to the sprite, to help positioning our collision shape
 	# at the right spot relative to the sprite in this preview.
@@ -167,7 +167,7 @@ func update():
 	%Origin.position -= (
 		self.animated_shape.animated_sprite.offset
 	)
-	
+
 	# III. Display the preview of the collision shape.
 	if self.animated_shape.shape_frames == null:
 		return
@@ -181,20 +181,20 @@ func update():
 		%ShapeHolder.debug_color = self.animated_shape.collision_shape.debug_color
 		if shape_frame.debug_color != Color.BLACK:
 			%ShapeHolder.debug_color = shape_frame.debug_color
-			
-	
+
+
 	# IV. Adjust the preview to the zoom level
 	%ZoomAdjuster.scale = Vector2.ONE * self.zoom_level
-	
+
 	# V. Background clear color.
 	%BackgroundColor.color = self.background_color
-	
+
 	# VI. Tooltip on the main sprite button
 	%SpriteButton.tooltip_text = "%s/%d" % [self.animation_name, self.frame_index]
 	if shape_frame != null:
 		%SpriteButton.tooltip_text += " %s" % [shape_frame]
 		%SpriteButton.tooltip_text += "\nClick to edit."
-	
+
 	# X. Action button: Create
 	if shape_frame == null:
 		%CreateButton.visible = true
@@ -202,7 +202,7 @@ func update():
 	else:
 		%CreateButton.visible = false
 		%CreateButton.disabled = true
-	
+
 	# XI. Action button: Edit
 	#if shape_frame == null:
 		#%EditButton.visible = false
@@ -210,7 +210,7 @@ func update():
 	#else:
 		#%EditButton.visible = true
 		#%EditButton.disabled = false
-	
+
 	# XII. Action button: Copy
 	if shape_frame == null:
 		%CopyButton.visible = false
@@ -218,7 +218,7 @@ func update():
 	else:
 		%CopyButton.visible = true
 		%CopyButton.disabled = false
-	
+
 	# XIII. Action button: Delete
 	if shape_frame == null:
 		%DeleteButton.visible = false
@@ -226,7 +226,7 @@ func update():
 	else:
 		%DeleteButton.visible = true
 		%DeleteButton.disabled = false
-	
+
 	# L. 2D View Preview / Mouse GUI Editor
 	if is_preview_showing():
 		preview_shape_frame()
@@ -290,7 +290,7 @@ func preview_shape_frame():
 		sprite_preview.owner = null
 	sprite_preview.animation = self.animation_name
 	sprite_preview.frame = self.frame_index
-	
+
 	if not is_instance_valid(preview_background):
 		preview_background = ColorRect.new()
 		preview_background.name = "PreviewBackgroundColorRect"
@@ -303,14 +303,14 @@ func preview_shape_frame():
 			preview_background.offset_right -= s.x * 0.5
 			preview_background.offset_top -= s.y * 0.5
 			preview_background.offset_bottom -= s.y * 0.5
-		# TODO: handle sprite offset too, probably
+		# NOTE: handle sprite offset too, probably
 	preview_background.color = self.background_color
-	
+
 	if preview_background.get_parent() != sprite_preview:
 		if preview_background.get_parent() != null:
 			preview_background.get_parent().remove_child(preview_background)
 		sprite_preview.add_child(preview_background)
-	
+
 	var shape_frame := get_shape_frame()
 	if shape_frame != null:
 		if not is_instance_valid(preview_shape):
@@ -330,10 +330,10 @@ func preview_shape_frame():
 		if is_instance_valid(preview_shape):
 			preview_shape.queue_free()
 			preview_shape = null
-	
+
 	if sprite_preview.get_parent() == null:
 		self.animated_shape.animated_sprite.add_sibling(sprite_preview)
-	
+
 	var selection := EditorInterface.get_selection().get_selected_nodes()
 	var already_selected := not selection.is_empty()
 	if already_selected:
@@ -345,7 +345,7 @@ func preview_shape_frame():
 		# Anyway we don't even WANT to inspect this node, and we have to hack
 		# around this unwanted inspection, see _on_sprite_button_toggled().
 		#EditorInterface.edit_node(preview_shape)
-		
+
 		# This path was created using the infamous Editor Debugger with a tweak.
 		# We are not using the raw index in parent, but index by class in parent
 		# because it will be a little more resilient to changes in the tree.
@@ -455,9 +455,9 @@ func _on_create_button_pressed():
 	var shape_frame := get_shape_frame()
 	if shape_frame != null:
 		return
-	
+
 	# We could also use the UndoRedo here, but…  Hassle > Gain
-	
+
 	shape_frame = ShapeFrame2D.new()
 	shape_frame.disabled = self.animated_shape.collision_shape.disabled
 	shape_frame.position = self.animated_shape.collision_shape.position
@@ -468,7 +468,7 @@ func _on_create_button_pressed():
 	self.animated_shape.shape_frames.set_shape_frame(
 		self.animation_name, self.frame_index, shape_frame,
 	)
-	
+
 	update()
 	connect_to_shape_frame()
 	inspect_shape_frame()
@@ -496,10 +496,10 @@ func _on_paste_button_pressed():
 		return
 	if not (pasted_shape_frame is ShapeFrame2D):
 		return
-	
+
 	if Input.is_key_pressed(KEY_CTRL) or Input.is_key_pressed(KEY_META):
 		pasted_shape_frame = pasted_shape_frame.duplicate(true)
-	
+
 	if self.undo_redo != null:
 		self.undo_redo.create_action(
 			tr("Paste Shape Frame"), UndoRedo.MERGE_DISABLE, self,
@@ -558,7 +558,7 @@ func _on_delete_button_pressed():
 	var shape_frame := get_shape_frame()
 	if shape_frame == null:
 		return
-	
+
 	if self.undo_redo != null:
 		self.undo_redo.create_action(
 			tr("Delete Shape Frame"), UndoRedo.MERGE_DISABLE, self,
@@ -601,4 +601,3 @@ func _on_delete_button_pressed():
 		remove_shape_frame()
 		update()
 		emit_changed()
-

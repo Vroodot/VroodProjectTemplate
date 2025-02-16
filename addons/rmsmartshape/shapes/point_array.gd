@@ -115,7 +115,7 @@ func _set_constraints(cs: Dictionary) -> void:
 	_constraints = cs
 
 	# For backwards compatibility (Array to Vector2i transition)
-	# FIXME: Maybe remove during the next breaking release
+	# Maybe remove during the next breaking release
 	SS2D_IndexTuple.dict_validate(_constraints, TYPE_INT)
 
 
@@ -166,7 +166,7 @@ func add_point(point: Vector2, idx: int = -1, use_key: int = -1) -> int:
 ## @deprecated
 func set_point(key: int, value: SS2D_Point) -> void:
 	if has_point(key):
-		# FIXME: Should there be a call to remove_constraints() like in remove_point()? Because
+		# NOTE: Should there be a call to remove_constraints() like in remove_point()? Because
 		# we're technically deleting a point and replacing it with another.
 		_unhook_point(get_point(key))
 		_points[key] = value
@@ -515,7 +515,7 @@ func debug_print() -> void:
 ## dict: Dict[Vector2i, SS2D_Material_Edge_Metadata]
 func set_material_overrides(dict: Dictionary) -> void:
 	# For backwards compatibility (Array to Vector2i transition)
-	# FIXME: Maybe remove during the next breaking release
+	# NOTE: Maybe remove during the next breaking release
 	SS2D_IndexTuple.dict_validate(dict, SS2D_Material_Edge_Metadata)
 
 	if _material_overrides != null:

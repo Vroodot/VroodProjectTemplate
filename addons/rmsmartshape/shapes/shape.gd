@@ -231,7 +231,7 @@ func set_collision_offset(s: float) -> void:
 	notify_property_list_changed()
 
 
-# FIXME: Only used by unit test.
+# NOTE: Only used by unit test.
 func set_curve(curve: Curve2D) -> void:
 	_points.begin_update()
 	_points.clear()
@@ -255,7 +255,7 @@ func _set_editor_debug(value: bool) -> void:
 
 
 func set_render_node_light_masks(value: int) -> void:
-	# TODO: This method should be called when user changes mask in the inspector.
+	# NOTE: This method should be called when user changes mask in the inspector.
 	var render_parent: SS2D_Shape_Render = _get_rendering_nodes_parent()
 	for c: CanvasItem in render_parent.get_children():
 		c.light_mask = value
@@ -376,7 +376,7 @@ func adjust_add_point_index(index: int) -> int:
 	return index
 
 
-# FIXME: Only unit tests use this.
+# Only unit tests use this.
 func add_points(verts: PackedVector2Array, starting_index: int = -1, key: int = -1) -> PackedInt32Array:
 	starting_index = adjust_add_point_index(starting_index)
 	var keys := PackedInt32Array()
@@ -1360,7 +1360,7 @@ func _build_edges(s_mat: SS2D_Material_Shape, verts: PackedVector2Array) -> Arra
 	# Add the overrides to the mappings to be rendered
 	for override in overrides:
 		index_maps.push_back(override)
-	
+
 	# Edge case for web so it doesn't use thread
 	if OS.get_name() != "Web":
 		var threads: Array[Thread] = []
@@ -1373,14 +1373,14 @@ func _build_edges(s_mat: SS2D_Material_Shape, verts: PackedVector2Array) -> Arra
 		for thread in threads:
 			var new_edge: SS2D_Edge = thread.wait_to_finish()
 			edges.push_back(new_edge)
-		
+
 	else:
 		# Process index_maps sequentially for web exports (probably slower than thread)
 		for index_map in index_maps:
 			var args = [index_map, s_mat.render_offset, 0.0]
 			var new_edge: SS2D_Edge = _build_edge_with_material_thread_wrapper(args)
 			edges.push_back(new_edge)
-			
+
 	return edges
 
 
@@ -1523,7 +1523,7 @@ func debug_print_points() -> void:
 
 ## Get Number of TessPoints from the start and end indicies of the index_map parameter.
 func _edge_data_get_tess_point_count(index_map: SS2D_IndexMap) -> int:
-	## TODO Test this function
+	## NOTE Test this function
 	var count: int = 0
 	for i in range(index_map.indicies.size() - 1):
 		var this_idx := index_map.indicies[i]

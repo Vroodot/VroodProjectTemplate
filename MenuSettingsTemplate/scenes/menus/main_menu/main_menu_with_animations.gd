@@ -36,7 +36,7 @@ func _close_sub_menu():
 	super._close_sub_menu()
 	animation_state_machine.travel("OpenMainMenu")
 
-func _setup_level_select(): 
+func _setup_level_select():
 	if level_select_packed_scene != null:
 		level_select_scene = level_select_packed_scene.instantiate()
 		level_select_scene.hide()

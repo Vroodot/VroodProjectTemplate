@@ -30,25 +30,6 @@ func is_valid() -> bool:
 	return SS2D_IndexMap.is_index_array_valid(indicies)
 
 
-# FIXME: Unused. Remove eventually
-# func get_contiguous_segments() -> Array:
-# 	if is_contiguous():
-# 		return [indicies.duplicate()]
-# 	var segments: Array = []
-# 	var break_idx: int = find_break()
-# 	var remainder: Array[int] = indicies.duplicate()
-# 	while break_idx != -1:
-# 		var new_slice: Array[int] = []
-# 		for i in range(0, break_idx):
-# 			new_slice.push_back(remainder[i])
-# 		segments.push_back(new_slice)
-# 		remainder = remainder.slice(break_idx, remainder.size())
-# 		break_idx = SS2D_IndexMap.find_break_in_array(remainder)
-# 	if not remainder.is_empty():
-# 		segments.push_back(remainder)
-# 	return segments
-
-
 ## Will join together segments that share the same idx,
 ## ex. [1,2], [4,5], and [2,3,4] become [1,2,3,4,5]
 static func join_segments(segments: Array[PackedInt32Array]) -> Array[PackedInt32Array]:
@@ -125,16 +106,8 @@ func has_index(idx: int) -> bool:
 	return indicies.has(idx)
 
 
-# FIXME: Unused, remove eventually.
-# func lowest_index() -> int:
-# 	return indicies.min()
-#
-#
-# func highest_index() -> int:
-# 	return indicies.max()
 
-
-# FIXME: Unused, remove eventually
+# Unused, remove eventually
 func _split_indicies_into_multiple_mappings(new_indicies: PackedInt32Array) -> Array[SS2D_IndexMap]:
 	var maps: Array[SS2D_IndexMap] = []
 	var break_idx := SS2D_IndexMap.find_break_in_array(new_indicies)
@@ -158,7 +131,7 @@ func _split_indicies_into_multiple_mappings(new_indicies: PackedInt32Array) -> A
 	return maps
 
 
-## FIXME: Unused, remove eventually
+## FIX ME: Unused, remove eventually
 ## Will create a new set of SS2D_IndexMaps. [br][br]
 ##
 ## The new set will contain all of the indicies of the current set,
@@ -240,7 +213,7 @@ func remove_edges(to_remove: PackedInt32Array) -> Array[SS2D_IndexMap]:
 	return new_index_mappings
 
 
-# NOTE: Even though it makes more sense to return an Array[Vector2i], we return PackedInt32Arrays
+# Even though it makes more sense to return an Array[Vector2i], we return PackedInt32Arrays
 # instead because it makes things easier in the context where this function output is needed.
 static func indicies_to_edges(p_indicies: PackedInt32Array) -> Array[PackedInt32Array]:
 	var edges: Array[PackedInt32Array] = []

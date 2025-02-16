@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpw5igicmhqau"]
+
+[ext_resource type="Script" path="res://Utilities/Autoloads/SCRIPTS/References.gd" id="1_qwd46"]
+
+[node name="References" type="Node"]
+script = ExtResource("1_qwd46")
+color_example = Color(1, 1, 1, 1)
+color_other = Color(0.179287, 0.30605, 0.200669, 1)
