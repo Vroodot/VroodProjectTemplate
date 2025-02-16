@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0g8rxvl4835c"]
+[gd_scene load_steps=3 format=3 uid="uid://d0g8rxvl4835c"]
 
 [ext_resource type="Script" path="res://MenuSettingsTemplate/scenes/opening/opening.gd" id="2_lx6p4"]
+[ext_resource type="Script" path="res://Utilities/Components/Audio/background_music_player.gd" id="2_p2tqv"]
 
 [node name="Opening" type="Control"]
 layout_mode = 3
@@ -15,6 +16,8 @@ next_scene = "res://MenuSettingsTemplate/scenes/menus/main_menu/main_menu_with_a
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 autoplay = true
+bus = &"Music"
+script = ExtResource("2_p2tqv")
 
 [node name="ImagesContainer" type="MarginContainer" parent="."]
 unique_name_in_owner = true

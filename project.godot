@@ -15,7 +15,7 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 
 [audio]
 
-buses/default_bus_layout="res://Audio/AudioBus.tres"
+buses/default_bus_layout="res://Resources/Audio/AudioBus.tres"
 
 [autoload]
 
@@ -35,8 +35,6 @@ InputHelper="*res://Utilities/Autoloads/InputHelper.gd"
 [debug]
 
 gdscript/warnings/unused_signal=0
-gdscript/warnings/untyped_declaration=1
-gdscript/warnings/inferred_declaration=1
 
 [editor]
 

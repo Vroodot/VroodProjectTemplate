@@ -30,8 +30,8 @@ static func repeat(element: Variant, times: int) -> Array[Variant]:
 	return result
 
 ## Flatten any array with n dimensions recursively
-static func flatten(array: Array[Variant]):
-	var result := []
+static func flatten(array: Array[Variant]) -> Array[Variant]:
+	var result: Array = []
 
 	for i in array.size():
 		if typeof(array[i]) >= TYPE_ARRAY:
@@ -148,12 +148,15 @@ static func merge_unique(first: Array[Variant], second: Array[Variant]) -> Array
 ## [1,2,3,4,5,6,7,8,9] -> [[1, 2, 3, 4], [5, 6, 7, 8], [9]]
 static func chunk(array: Array[Variant], size: int, only_chunks_with_same_size: bool = false):
 	var result = []
+
 	var i = 0
+
 	var j = -1
 
 	if only_chunks_with_same_size:
 		@warning_ignore("integer_division")
 		array = array.slice(0, floor(array.size() / size) * size)
+
 
 	for element in array:
 		if i % size == 0:

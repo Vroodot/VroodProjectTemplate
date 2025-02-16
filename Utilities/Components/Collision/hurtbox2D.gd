@@ -2,7 +2,7 @@ class_name Hurtbox2D
 extends Area2D
 
 
-
+signal hitbox_detected(hitbox)
 
 func _init() -> void:
 	monitoring = true
@@ -23,5 +23,6 @@ func disable() -> void:
 
 
 func on_area_entered(hitbox: Area2D) -> void:
-	if hitbox is not Hitbox2D: return
-	Events.hitbox_detected.emit(hitbox)
+	if hitbox is not Hitbox2D or hitbox.owner == owner:
+		return
+	hitbox_detected.emit(hitbox)
